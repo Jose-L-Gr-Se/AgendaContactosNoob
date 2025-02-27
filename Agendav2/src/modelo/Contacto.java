@@ -32,7 +32,19 @@ public class Contacto {
     // Métodos "setter" - permiten modificar los valores de los atributos privados
     // con validación incluida
     public void setNombre(String nombre) {
+        
         // Verificamos que el nombre no sea null ni esté vacío
-        if (nombre ==null)
+        if (nombre == null || nombre.trim().isEmpty()) {
+            // Si el nombre no es válido, lanzamos un error
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        // trim() elimina espacios en blanco al inicio y final
+        this.nombre = nombre.trim();
+    }
+    
+    // Método para mostrar el contacto como texto
+    @Override // Esta anotación indica que estamos sobrescribiendo un método de la clase padre
+    public String toString() {
+        return String.format("%s %s - %s", nombre, apellidos, telefono);
     }
 }
